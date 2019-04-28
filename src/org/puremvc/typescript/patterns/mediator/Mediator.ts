@@ -98,9 +98,9 @@ module puremvc
 		 * @return
 		 * 		The list of notifications names in which is interested the <code>Mediator</code>.
 		 */
-		listNotificationInterests():string[]
+		listNotificationInterests():Array<string>
 		{
-			return new string[];
+			return new Array();
 		}
 
 		/**
