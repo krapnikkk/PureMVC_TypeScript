@@ -33,13 +33,13 @@ Model保存了对Proxy对象的引用，Proxy负责操作数据模型，与服�
 View保存了对Mediator对象的引用。由Mediator对象来操作具体的视图组件（View Component）,包括：添加事件监听器，发送或接收Notification，直接改变视图组件（View Component）的状态。
 这样做实现了把视图和控制它的逻辑分离开来。
 
-### Mediator
+### Mediator【传递者】
 * registerMediator 【通过MediatorName作为键值对在View的mediatorMap对象(object)存储Mediator,并将mediator感兴趣的消息（listNotificationInterests）通过构建一个Observer（观察者）[mediator.handleNotification,mediator]，再通过notificationName(消息名)作为键值对储存在View的observerMap对象(object)中】
 * removeMediator   【通过mediatorName查询在View的mediatorMap对象(object)上存储的mediator;将Mediator存储起来的感兴趣的消息通过removeObserver移除掉】
 * retrieveMediator 【通过mediatorName作为键值对获取在View的mediatorMap对象(object)中的Mediator】
 * hasMediator      【通过mediatorName作为键值对判断在View的mediatorMap对象(object)中的Mediator是否存在】 
 
-#### observer
+#### observer【观察者】
 * registerObserver 【通过notificationName作为键值对在View的observerMap对象(object)存储observer】
 * removeObserver   【通过对比observer的notifyContext将observer从observerMap】
 * notifyObservers  【通过notificationName作为键值对遍历observerMap对象(object)存储observer引用,通知(notifyObserver)observer】
@@ -47,18 +47,24 @@ View保存了对Mediator对象的引用。由Mediator对象来操作具体的视
 ### Controller与Command
 Controller保存所有Command的映射。Command类是无状态的，只在需要时才被创建。
 
-#### Command
+#### Command【命令】
 
-* registerCommand
-* executeCommand
-* hasCommand
-* removeCommand
+* registerCommand 【通过notificationName作为键值对在自身的commandMap对象(object)存储commandClassRef引用，并且在view身上（registerObserver）注册对应的Observer（notificationName，executeCommand）】
+* executeCommand 【通过notification获取存储在commandMap的commandClassRef引用，创建一个Command去执行】
+* hasCommand 【通过notificationName作为键值对判断在自身的commandMap对象(object)中的commandClassRef是否存在】
+* removeCommand 【通过notificationName作为键值对在自身的commandMap对象(object)移除commandClassRef引用，并且在view身上（removeObserver）移除对应的Observer（notificationName）】
 
 ------
-### Proxy
+### Proxy【代理者】
+* 继承Notifier,且
 
 ### Mediator
 
-### observer
-
 ### Command
+
+
+### Notification(消息）
+
+### Notifier(消息发布者）
+
+### observer(消息观察者）

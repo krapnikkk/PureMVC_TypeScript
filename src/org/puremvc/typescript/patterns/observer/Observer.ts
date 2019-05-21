@@ -119,8 +119,9 @@ module puremvc
 	
 		/**
 		 * Compare an object to the notification context.
+		 * 
 		 *
-		 * @param object
+		 * @param object 
 		 * 		The object to compare.
 		 *
 		 * @return
